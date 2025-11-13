@@ -1,4 +1,6 @@
-import { StyleSheet, View } from "react-native";
+// App.js
+import React from "react";
+import { Image, StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,6 +11,7 @@ import SpotCameraScreen from "./screens/SpotCameraScreen";
 import NewSpotCardScreen from "./screens/NewSpotCardScreen";
 import LogInScreen from "./screens/LogInScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import SearchMeetsScreen from "./screens/SearchMeetsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,34 +33,40 @@ export default function App() {
           initialRouteName="MainTabs"
           screenOptions={{ headerShown: false }}
         >
-          {/* main app with headers + nav */}
+          {/* Main app with header + top tabs */}
           <Stack.Screen name="MainTabs" component={MainWithHeader} />
 
-          {/* temp screens */}
+          {/* Temporary flows */}
           <Stack.Screen
             name="SpotCamera"
             component={SpotCameraScreen}
             options={{ presentation: "fullScreenModal" }}
           />
-
           <Stack.Screen
             name="NewSpotCard"
             component={NewSpotCardScreen}
             options={{ presentation: "fullScreenModal" }}
           />
 
-          {/* auth */}
+          {/* Auth */}
           <Stack.Screen
             name="Auth"
             component={LogInScreen}
             options={{ presentation: "modal" }}
           />
-
           <Stack.Screen
             name="Profile"
             component={ProfileScreen}
             options={{ presentation: "modal" }}
           />
+
+          <Stack.Screen
+            name="SearchMeets"
+            component={SearchMeetsScreen}
+            options={{ presentation: "modal", headerShown: false }}
+          />
+
+          {/* searchscreen */}
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
@@ -65,19 +74,13 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  safe: {
-    flex: 1,
-    backgroundColor: "#efefef",
-  },
-
+  safe: { flex: 1, backgroundColor: "#efefef" },
   header: {
     height: 72,
     paddingHorizontal: 16,
     alignItems: "flex-end",
     justifyContent: "flex-end",
   },
-
-  tabsWrap: {
-    flex: 1,
-  },
+  tabsWrap: { flex: 1 },
 });
+
