@@ -1,11 +1,31 @@
-import { View, Text, StyleSheet, TextInput, FlatList, Pressable, Platform, } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  Pressable,
+  Platform,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const SUGGESTED = [
-  { id: 'nearby', title: 'Nearby', subtitle: "Find what's around you" },
-  { id: 'richmond1', title: 'Richmond, British Columbia', subtitle: 'Most popular meet location near you' },
-  { id: 'richmond2', title: 'Richmond, British Columbia', subtitle: 'Most popular meet location near you' },
-  { id: 'richmond3', title: 'Richmond, British Columbia', subtitle: 'Most popular meet location near you' },
+  { id: "nearby", title: "Nearby", subtitle: "Find what's around you" },
+  {
+    id: "richmond1",
+    title: "Richmond, British Columbia",
+    subtitle: "Most popular meet location near you",
+  },
+  {
+    id: "richmond2",
+    title: "Richmond, British Columbia",
+    subtitle: "Most popular meet location near you",
+  },
+  {
+    id: "richmond3",
+    title: "Richmond, British Columbia",
+    subtitle: "Most popular meet location near you",
+  },
 ];
 
 export default function SearchMeetsScreen({ navigation }) {
@@ -35,8 +55,12 @@ export default function SearchMeetsScreen({ navigation }) {
             <Pressable style={styles.suggestion} onPress={() => {}}>
               <View style={styles.avatar} />
               <View style={{ flex: 1 }}>
-                <Text style={styles.title} numberOfLines={1}>{item.title}</Text>
-                <Text style={styles.subtitle} numberOfLines={1}>{item.subtitle}</Text>
+                <Text style={styles.title} numberOfLines={1}>
+                  {item.title}
+                </Text>
+                <Text style={styles.subtitle} numberOfLines={1}>
+                  {item.subtitle}
+                </Text>
               </View>
             </Pressable>
           )}
@@ -57,7 +81,7 @@ export default function SearchMeetsScreen({ navigation }) {
 
         <Pressable
           style={styles.cta}
-          onPress={() => navigation.navigate('MapResults')}
+          onPress={() => navigation.navigate("MapResults")}
         >
           <Ionicons name="search" size={16} color="#fff" />
           <Text style={styles.ctaText}>Search</Text>
@@ -68,77 +92,83 @@ export default function SearchMeetsScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#efefef', padding: 16 },
+  root: { flex: 1, backgroundColor: "#efefef", padding: 16 },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 20,
     padding: 16,
-    ...(Platform.OS === 'ios'
+    ...(Platform.OS === "ios"
       ? {
-          shadowColor: '#000',
+          shadowColor: "#000",
           shadowOpacity: 0.12,
           shadowRadius: 10,
           shadowOffset: { width: 0, height: 6 },
         }
       : { elevation: 6 }),
   },
-  h1: { fontSize: 24, fontWeight: '800', marginBottom: 12, color: '#111' },
+  h1: { fontSize: 24, fontWeight: "800", marginBottom: 12, color: "#111" },
 
   inputRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     height: 48,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#222',
+    borderColor: "#222",
     paddingHorizontal: 12,
     marginBottom: 12,
   },
-  input: { flex: 1, fontSize: 16, color: '#111' },
+  input: { flex: 1, fontSize: 16, color: "#111" },
 
-  label: { fontSize: 12, color: '#666', marginBottom: 8 },
+  label: { fontSize: 12, color: "#666", marginBottom: 8 },
 
-  suggestion: { flexDirection: 'row', alignItems: 'center' },
-  avatar: { width: 44, height: 44, borderRadius: 8, backgroundColor: '#d9d9d9', marginRight: 12 },
-  title: { fontSize: 14, fontWeight: '700', color: '#111' },
-  subtitle: { fontSize: 12, color: '#6A6A6A', marginTop: 2 },
+  suggestion: { flexDirection: "row", alignItems: "center" },
+  avatar: {
+    width: 44,
+    height: 44,
+    borderRadius: 8,
+    backgroundColor: "#d9d9d9",
+    marginRight: 12,
+  },
+  title: { fontSize: 14, fontWeight: "700", color: "#111" },
+  subtitle: { fontSize: 12, color: "#6A6A6A", marginTop: 2 },
 
   datesRow: {
     marginTop: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 14,
     paddingHorizontal: 16,
     height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    ...(Platform.OS === 'ios'
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    ...(Platform.OS === "ios"
       ? {
-          shadowColor: '#000',
+          shadowColor: "#000",
           shadowOpacity: 0.1,
           shadowRadius: 8,
           shadowOffset: { width: 0, height: 4 },
         }
       : { elevation: 4 }),
   },
-  when: { fontSize: 14, color: '#111' },
-  addDates: { fontSize: 14, color: '#111', fontWeight: '600' },
+  when: { fontSize: 14, color: "#111" },
+  addDates: { fontSize: 14, color: "#111", fontWeight: "600" },
 
   footer: {
     marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
-  clear: { textDecorationLine: 'underline', fontSize: 14, color: '#111' },
+  clear: { textDecorationLine: "underline", fontSize: 14, color: "#111" },
   cta: {
     height: 48,
     paddingHorizontal: 18,
     borderRadius: 10,
-    backgroundColor: '#d1211c',
-    flexDirection: 'row',
-    alignItems: 'center',
+    backgroundColor: "#d1211c",
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
-  ctaText: { color: '#fff', fontSize: 15, fontWeight: '700' },
+  ctaText: { color: "#fff", fontSize: 15, fontWeight: "700" },
 });

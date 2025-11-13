@@ -1,18 +1,26 @@
-import React, { useRef, useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Image, Platform, StatusBar } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { CameraView, useCameraPermissions } from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useRef, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Image,
+  Platform,
+  StatusBar,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { CameraView, useCameraPermissions } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function SpotCameraScreen({ navigation }) {
   const camRef = useRef(null);
   const [permission, requestPermission] = useCameraPermissions();
   const [preview, setPreview] = useState(null);
-  const [facing, setFacing] = useState('back');
-  const [flash, setFlash] = useState('off');
+  const [facing, setFacing] = useState("back");
+  const [flash, setFlash] = useState("off");
 
-  if (!permission) return <View style={{ flex: 1, backgroundColor: '#000' }} />;
+  if (!permission) return <View style={{ flex: 1, backgroundColor: "#000" }} />;
 
   if (!permission.granted) {
     return (
@@ -40,7 +48,7 @@ export default function SpotCameraScreen({ navigation }) {
     try {
       await MediaLibrary.requestPermissionsAsync();
     } catch {}
-    navigation.replace('NewSpotCard', { uri: preview.uri });
+    navigation.replace("NewSpotCard", { uri: preview.uri });
   };
 
   // preview
@@ -73,13 +81,26 @@ export default function SpotCameraScreen({ navigation }) {
         />
 
         <View style={styles.topControls}>
-          <Pressable style={styles.smallBtn} onPress={() => navigation.goBack()}>
+          <Pressable
+            style={styles.smallBtn}
+            onPress={() => navigation.goBack()}
+          >
             <Ionicons name="close" size={18} color="#111" />
           </Pressable>
-          <Pressable style={styles.smallBtn} onPress={() => setFlash(flash === 'off' ? 'on' : 'off')}>
-            <Ionicons name={flash === 'off' ? 'flash-off' : 'flash'} size={16} color="#111" />
+          <Pressable
+            style={styles.smallBtn}
+            onPress={() => setFlash(flash === "off" ? "on" : "off")}
+          >
+            <Ionicons
+              name={flash === "off" ? "flash-off" : "flash"}
+              size={16}
+              color="#111"
+            />
           </Pressable>
-          <Pressable style={styles.smallBtn} onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}>
+          <Pressable
+            style={styles.smallBtn}
+            onPress={() => setFacing(facing === "back" ? "front" : "back")}
+          >
             <Ionicons name="camera-reverse" size={16} color="#111" />
           </Pressable>
         </View>
@@ -95,19 +116,19 @@ export default function SpotCameraScreen({ navigation }) {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: '#000000ff'
+    backgroundColor: "#000000ff",
   },
-  
+
   root: {
     flex: 1,
-    backgroundColor: '#000000ff' 
+    backgroundColor: "#000000ff",
   },
 
   topControls: {
-    position: 'absolute',
-    top: Platform.OS === 'ios' ? 60 : (StatusBar.currentHeight || 0) + 12,
+    position: "absolute",
+    top: Platform.OS === "ios" ? 60 : (StatusBar.currentHeight || 0) + 12,
     right: 16,
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 10,
   },
 
@@ -115,22 +136,22 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: '#ffffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#ffffffff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   captureFab: {
-    position: 'absolute',
+    position: "absolute",
     right: 24,
     bottom: 28,
     width: 82,
     height: 82,
     borderRadius: 41,
-    backgroundColor: '#ffffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
+    backgroundColor: "#ffffffff",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
     shadowOpacity: 0.25,
     shadowRadius: 12,
     shadowOffset: { width: 0, height: 6 },
@@ -141,32 +162,32 @@ const styles = StyleSheet.create({
     width: 68,
     height: 68,
     borderRadius: 34,
-    backgroundColor: '#d1211c',
+    backgroundColor: "#d1211c",
   },
 
   // preview
   previewRoot: {
     flex: 1,
-    backgroundColor: '#ffffffff'
+    backgroundColor: "#ffffffff",
   },
 
   previewImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover' 
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
 
   retake: {
-    position: 'absolute',
+    position: "absolute",
     left: 16,
     bottom: 26,
     height: 44,
     paddingHorizontal: 16,
     borderRadius: 22,
-    backgroundColor: '#ffffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000000ff',
+    backgroundColor: "#ffffffff",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000000ff",
     shadowOpacity: 0.2,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 6 },
@@ -174,22 +195,22 @@ const styles = StyleSheet.create({
   },
 
   retakeText: {
-    color: '#000000ff',
+    color: "#000000ff",
     fontSize: 15,
-    fontWeight: '600'
+    fontWeight: "600",
   },
 
   nextFab: {
-    position: 'absolute',
+    position: "absolute",
     right: 16,
     bottom: 16,
     width: 88,
     height: 88,
     borderRadius: 44,
-    backgroundColor: '#d1211c',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000000ff',
+    backgroundColor: "#d1211c",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000000ff",
     shadowOpacity: 0.3,
     shadowRadius: 14,
     shadowOffset: { width: 0, height: 8 },
@@ -199,29 +220,29 @@ const styles = StyleSheet.create({
   // permission
   center: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#000000ff'
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#000000ff",
   },
 
   permTitle: {
-    color: '#ffffffff',
+    color: "#ffffffff",
     fontSize: 18,
-    marginBottom: 12 
+    marginBottom: 12,
   },
 
   primary: {
-    backgroundColor: '#d1211c',
+    backgroundColor: "#d1211c",
     paddingHorizontal: 18,
     height: 44,
     borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   primaryText: {
-    color: '#ffffffff',
+    color: "#ffffffff",
     fontSize: 15,
-    fontWeight: '700'
+    fontWeight: "700",
   },
 });
