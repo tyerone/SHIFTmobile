@@ -1,3 +1,4 @@
+import React from "react";
 import {
   View,
   Text,
@@ -8,6 +9,7 @@ import {
   Platform,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import MapView, { Marker } from "react-native-maps";
 
 const SUGGESTED = [
   { id: "nearby", title: "Nearby", subtitle: "Find what's around you" },
@@ -31,6 +33,25 @@ const SUGGESTED = [
 export default function SearchMeetsScreen({ navigation }) {
   return (
     <View style={styles.root}>
+      <View style={styles.mapContainer}>
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: 49.1666,
+            longitude: -123.1336,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
+          }}
+          provider="google"
+        >
+          <Marker
+            coordinate={{ latitude: 49.1666, longitude: -123.1336 }}
+            title="Richmond, BC"
+            description="Popular meet location"
+          />
+        </MapView>
+      </View>
+
       <View style={styles.card}>
         <Text style={styles.h1}>Where?</Text>
 
@@ -40,7 +61,6 @@ export default function SearchMeetsScreen({ navigation }) {
             style={styles.input}
             placeholder="Search cities"
             placeholderTextColor="#777"
-            autoFocus
             returnKeyType="search"
           />
         </View>
@@ -93,6 +113,22 @@ export default function SearchMeetsScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: "#efefef", padding: 16 },
+  mapContainer: {
+    height: 200,
+    borderRadius: 14,
+    overflow: "hidden",
+    marginBottom: 16,
+    ...(Platform.OS === "ios"
+      ? {
+          shadowColor: "#000",
+          shadowOpacity: 0.12,
+          shadowRadius: 10,
+          shadowOffset: { width: 0, height: 6 },
+        }
+      : { elevation: 6 }),
+  },
+  map: { flex: 1 },
+
   card: {
     backgroundColor: "#fff",
     borderRadius: 20,

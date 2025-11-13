@@ -125,7 +125,7 @@ export default function MeetScreen({ navigation }) {
     >
       <View style={styles.searchWrap}>
         <Pressable
-          // onPress={() => navigation.navigate('SearchMeets')} TO BE ADDED
+          onPress={() => navigation.navigate("SearchMeets")}
           style={styles.searchPill}
         >
           <Ionicons
@@ -166,18 +166,10 @@ export default function MeetScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#efefef",
-  },
+  container: { flex: 1, backgroundColor: "#efefef" },
 
-  // search
-  searchWrap: {
-    paddingHorizontal: 16,
-    paddingTop: 12,
-    paddingBottom: 16,
-  },
-
+  // Search
+  searchWrap: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 16 },
   searchPill: {
     flexDirection: "row",
     alignItems: "center",
@@ -188,23 +180,13 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOpacity: 0.12,
     shadowRadius: 10,
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
+    shadowOffset: { width: 0, height: 6 },
     elevation: 6,
   },
+  searchText: { color: "#666", fontSize: 16 },
 
-  searchText: {
-    color: "#666",
-    fontSize: 16,
-  },
-
-  // sections
-  sectionBlock: {
-    marginTop: 8,
-  },
-
+  // Sections
+  sectionBlock: { marginTop: 8 },
   sectionHeader: {
     paddingHorizontal: 16,
     marginBottom: 8,
@@ -213,14 +195,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  sectionTitle: { fontSize: 18, fontWeight: "700", color: "#111" },
 
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#111",
-  },
-
-  // cards
+  // Cards
   card: {
     width: 220,
     backgroundColor: "transparent",
@@ -228,7 +205,6 @@ const styles = StyleSheet.create({
     padding: 0,
     marginVertical: 2,
   },
-
   cardImage: {
     width: "100%",
     height: 160,
@@ -236,14 +212,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     backgroundColor: "transparent",
   },
-
   cardTitle: {
     fontSize: 14,
     fontWeight: "700",
     color: "#111",
     paddingHorizontal: 4,
   },
-
   cardMeta: {
     fontSize: 12,
     color: "#6A6A6A",
