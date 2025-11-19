@@ -83,4 +83,3 @@ const styles = StyleSheet.create({
   },
   tabsWrap: { flex: 1 },
 });
-
