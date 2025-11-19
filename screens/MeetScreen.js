@@ -9,6 +9,24 @@ import {
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useState, useEffect } from "react";
+import * as Location from "expo-location";
+
+useEffect(() => {
+  (async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      console.log("Permission denied");
+      return;
+    }
+
+    let loc = await Location.getCurrentPositionAsync({});
+    setUserLocation({
+      latitude: loc.coords.latitude,
+      longitude: loc.coords.longitude,
+    });
+  })();
+}, []);
 
 function SectionHeader({ title, onPress }) {
   return (
@@ -117,6 +135,8 @@ export default function MeetScreen({ navigation }) {
 
   const others = useMemo(() => meets, [meets]);
 
+  const [userLocation, setUserLocation] = useState(null);
+
   return (
     <ScrollView
       style={styles.container}
@@ -125,7 +145,7 @@ export default function MeetScreen({ navigation }) {
     >
       <View style={styles.searchWrap}>
         <Pressable
-          onPress={() => navigation.navigate("SearchMeets")}
+          onPress={() => navigation.navigate("SearchMeets", { userLocation })}
           style={styles.searchPill}
         >
           <Ionicons
