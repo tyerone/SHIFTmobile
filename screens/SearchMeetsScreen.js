@@ -11,47 +11,58 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 
-const SUGGESTED = [
-  { id: "nearby", title: "Nearby", subtitle: "Find what's around you" },
-  {
-    id: "richmond1",
-    title: "Richmond, British Columbia",
-    subtitle: "Most popular meet location near you",
-  },
-  {
-    id: "richmond2",
-    title: "Richmond, British Columbia",
-    subtitle: "Most popular meet location near you",
-  },
-  {
-    id: "richmond3",
-    title: "Richmond, British Columbia",
-    subtitle: "Most popular meet location near you",
-  },
-];
+// 🚨 NEW: destructure `route` so we can grab location param
+export default function SearchMeetsScreen({ navigation, route }) {
+  // 🚨 NEW: get userLocation or fall back to Richmond
+  const userLocation = route?.params?.userLocation || {
+    latitude: 49.1666,
+    longitude: -123.1336,
+  };
 
-export default function SearchMeetsScreen({ navigation }) {
+  const mapRegion = {
+    latitude: userLocation.latitude,
+    longitude: userLocation.longitude,
+    latitudeDelta: 0.05,
+    longitudeDelta: 0.05,
+  };
+
+  const SUGGESTED = [
+    { id: "nearby", title: "Nearby", subtitle: "Find what's around you" },
+    {
+      id: "richmond1",
+      title: "Richmond, British Columbia",
+      subtitle: "Most popular meet location near you",
+    },
+    {
+      id: "richmond2",
+      title: "Richmond, British Columbia",
+      subtitle: "Most popular meet location near you",
+    },
+    {
+      id: "richmond3",
+      title: "Richmond, British Columbia",
+      subtitle: "Most popular meet location near you",
+    },
+  ];
+
   return (
     <View style={styles.root}>
+      {/* 🌍 MAP SECTION */}
       <View style={styles.mapContainer}>
         <MapView
           style={styles.map}
-          initialRegion={{
-            latitude: 49.1666,
-            longitude: -123.1336,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
-          }}
+          initialRegion={mapRegion} // <-- now uses user location dynamically
           provider="google"
         >
           <Marker
-            coordinate={{ latitude: 49.1666, longitude: -123.1336 }}
-            title="Richmond, BC"
-            description="Popular meet location"
+            coordinate={userLocation}
+            title="Your Location"
+            description="Centered based on your device"
           />
         </MapView>
       </View>
 
+      {/* CARD UI BELOW */}
       <View style={styles.card}>
         <Text style={styles.h1}>Where?</Text>
 
@@ -99,6 +110,7 @@ export default function SearchMeetsScreen({ navigation }) {
           <Text style={styles.clear}>Clear all</Text>
         </Pressable>
 
+        {/* 🔍 Search button */}
         <Pressable
           style={styles.cta}
           onPress={() => navigation.navigate("MapResults")}
@@ -110,7 +122,6 @@ export default function SearchMeetsScreen({ navigation }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: "#efefef", padding: 16 },
   mapContainer: {
